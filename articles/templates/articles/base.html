@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    
+    <!-- Pico CSS from CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    
+    <title>{% block title %}My Django App{% endblock %}</title>
+    
+    <!-- Additional CSS -->
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Header -->
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}" class="contrast"><strong>My App</strong></a></li>
+            </ul>
+            <ul>
+                <li><a href="#" class="contrast">Home</a></li>
+                <li><a href="#" class="contrast">About</a></li>
+               
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        {% block content %}
+            <article>
+                <header>
+                    <h1>Welcome to Django with Pico CSS!</h1>
+                </header>
+                <p>This is your base template using Pico CSS framework.</p>
+                <footer>
+                    <small>Built with Django and Pico CSS</small>
+                </footer>
+            </article>
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="container">
+        <hr>
+        <p><small>© 2025 My Django App. All rights reserved.</small></p>
+    </footer>
+
+    <!-- Additional JavaScript -->
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

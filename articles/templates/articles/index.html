@@ -1,0 +1,33 @@
+{% extends 'articles/base.html' %}
+
+{% block title %}Articles - My Django App {% endblock %}
+
+{% block content %}
+    <!-- Page Header -->
+
+
+    <!-- Articles List -->
+    <section>
+        {% if articles %}
+            {% for article in articles %}
+                <article>
+       
+                        <h3><a href="{% url 'detail' article.id %}">{{ article.title }}</a></h3>
+                        <p>
+                            <small>
+                                <mark>{{ article.category }}</mark>
+                            </small>
+                        </p>
+         
+                </article>
+            {% endfor %}            
+
+         {% else %}
+            <p>No articles found.</p>
+        {% endif %}
+
+    </section>
+
+
+
+{% endblock %}

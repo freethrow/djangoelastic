@@ -1,0 +1,37 @@
+{% extends 'articles/base.html' %}
+
+{% block title %}{{ article.title }} - My Django App{% endblock %}
+
+{% block content %}
+    <!-- Article Header -->
+    <section>
+        <article>
+            <header>
+                <h1>{{ article.title }}</h1>
+                <p>
+                    <small>
+                        <mark>{{ article.category }}</mark>
+                    </small>
+                </p>
+            </header>
+        </article>
+    </section>
+
+    <!-- Article Content -->
+    <section>
+        <article>
+            <div>
+                {{ article.content|linebreaks }}
+            </div>
+        </article>
+    </section>
+
+    <!-- Navigation -->
+    <section>
+        <article>
+            <footer>
+                <a href="{% url 'index' %}" role="button" class="secondary">← Back to Articles</a>
+            </footer>
+        </article>
+    </section>
+{% endblock %}
