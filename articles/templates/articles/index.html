@@ -3,31 +3,92 @@
 {% block title %}Articles - My Django App {% endblock %}
 
 {% block content %}
-    <!-- Page Header -->
+    <!-- Page Header with Add Button -->
+    <section>
+        <article>
+            <header style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h1>Articles</h1>
+                    {% if total_count %}
+                        <p>{{ total_count }} article{{ total_count|pluralize }} available</p>
+                    {% endif %}
+                </div>
+                <div>
+                    <a href="{% url 'add_article' %}" role="button">+ Add New Article</a>
+                </div>
+            </header>
+        </article>
+    </section>
 
+    <!-- Quick Actions -->
+    <section>
+        <article>
+            <nav style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="{% url 'test_search' %}" role="button" class="outline">🔍 Search Articles</a>
+                <a href="{% url 'add_article' %}" role="button" class="outline">✏️ Write Article</a>
+                <a href="{% url 'index' %}" role="button" class="outline">📄 All Articles</a>
+            </nav>
+        </article>
+    </section>
+
+    <!-- Display messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message-{{ message.tags }}" style="
+                padding: 1rem; 
+                margin: 1rem 0; 
+                border-radius: 0.5rem;
+                {% if message.tags == 'success' %}
+                    background-color: #d4edda;
+                    color: #155724;
+                    border: 1px solid #c3e6cb;
+                {% elif message.tags == 'error' %}
+                    background-color: #f8d7da;
+                    color: #721c24;
+                    border: 1px solid #f5c6cb;
+                {% endif %}
+            ">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
 
     <!-- Articles List -->
     <section>
         {% if articles %}
             {% for article in articles %}
                 <article>
-       
+                    <header>
                         <h3><a href="{% url 'detail' article.id %}">{{ article.title }}</a></h3>
                         <p>
                             <small>
                                 <mark>{{ article.category }}</mark>
+                                • ID: {{ article.id }}
                             </small>
                         </p>
-         
+                    </header>
+                    
+                    <!-- Show content preview -->
+                    {% if article.content %}
+                        <p>{{ article.content|truncatewords:20 }}</p>
+                    {% endif %}
+                    
+                    <footer>
+                        <a href="{% url 'detail' article.id %}" role="button" class="secondary">Read More</a>
+                    </footer>
                 </article>
             {% endfor %}            
 
          {% else %}
-            <p>No articles found.</p>
+            <article>
+                <header>
+                    <h2>No Articles Yet</h2>
+                </header>
+                <p>Start by creating your first article!</p>
+                <footer>
+                    <a href="{% url 'add_article' %}" role="button">Create Your First Article</a>
+                </footer>
+            </article>
         {% endif %}
-
     </section>
-
-
-
 {% endblock %}

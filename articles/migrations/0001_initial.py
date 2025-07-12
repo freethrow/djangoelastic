@@ -8,21 +8,28 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Article',
+            name="Article",
             fields=[
-                ('id', django_mongodb_backend.fields.ObjectIdAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=300)),
-                ('content', models.TextField()),
-                ('category', models.TextField()),
+                (
+                    "id",
+                    django_mongodb_backend.fields.ObjectIdAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=300)),
+                ("content", models.TextField()),
+                ("category", models.TextField()),
             ],
             options={
-                'db_table': 'articles',
-                'managed': False,
+                "db_table": "articles",
+                "managed": False,
             },
         ),
     ]

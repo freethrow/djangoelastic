@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_elasticsearch_dsl",
 ]
 
 MIDDLEWARE = [
@@ -128,3 +129,6 @@ MIGRATION_MODULES = {
     "auth": "mongo_migrations.auth",
     "contenttypes": "mongo_migrations.contenttypes",
 }
+
+
+ELASTICSEARCH_DSL = {"default": {"hosts": "http://localhost:9200"}}

@@ -1,0 +1,67 @@
+{% extends 'articles/base.html' %}
+
+{% block title %}Search Articles{% endblock %}
+
+{% block content %}
+    <section>
+        <article>
+            <header>
+                <h1>Search Articles</h1>
+            </header>
+            
+            <!-- Search Form -->
+            <form method="get">
+                <fieldset role="group">
+                    <input type="search" 
+                           name="q" 
+                           placeholder="Search articles..." 
+                           value="{{ query }}"
+                           required
+                           autocomplete="off">
+                    <input type="submit" value="Search">
+                </fieldset>
+            </form>
+        </article>
+    </section>
+
+    <!-- Search Results -->
+    {% if query %}
+        <section>
+            <article>
+                <header>
+                    {% if error %}
+                        <p style="color: red;"><strong>Error:</strong> {{ error }}</p>
+                    {% else %}
+                        <h2>Search Results</h2>
+                        <p>Found <strong>{{ total_hits }}</strong> result{{ total_hits|pluralize }} for "{{ query }}"</p>
+                        {% if total_hits > 0 %}
+                            <small>Results sorted by relevance (title matches weighted 3x higher)</small>
+                        {% endif %}
+                    {% endif %}
+                </header>
+
+                {% if results %}
+                    {% for result in results %}
+                        <article>
+                            <header>
+                                <h3>{{ result.title }}</h3>
+                                <p>
+                                    <small>
+                                        <mark>{{ result.category }}</mark>
+                                        • Relevance Score: <mark>{{ result.score|floatformat:2 }}</mark>
+                                    </small>
+                                </p>
+                            </header>
+                            <p>{{ result.content }}</p>
+                            <footer>
+                                <a href="{% url 'detail' result.id %}" role="button" class="secondary">Read Full Article</a>
+                            </footer>
+                        </article>
+                    {% endfor %}
+                {% elif not error %}
+                    <p>No articles found matching "{{ query }}". Try different keywords.</p>
+                {% endif %}
+            </article>
+        </section>
+    {% endif %}
+{% endblock %}
