@@ -79,7 +79,7 @@ WSGI_APPLICATION = "elasticdjango.wsgi.application"
 
 DATABASES = {
     "default": django_mongodb_backend.parse_uri(
-        "mongodb://localhost:12703/elasticdb?directConnection=true"
+        "mongodb://localhost:7892/elasticdb?directConnection=true"
     ),
 }
 
